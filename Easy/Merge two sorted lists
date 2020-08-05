@@ -1,0 +1,49 @@
+Merge two sorted linked lists and return it as a new sorted list. The new list should be made by splicing together the nodes of the first two lists.
+
+Example:
+
+Input: 1->2->4, 1->3->4
+Output: 1->1->2->3->4->4
+
+Solution:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode walker = head;
+        while(l1!=null && l2!=null){
+            if(l1.val<l2.val){
+                walker.next=l1;
+                walker = walker.next;
+                l1 = l1.next;
+            }else{
+                walker.next=l2;
+                walker = walker.next;
+                l2=l2.next;
+            }
+        }
+        if(l1==null){
+            while(l2 != null){
+                walker.next = l2;
+                walker = walker.next;
+                l2 = l2.next;
+            }
+        }
+        if(l2==null){
+            while(l1 != null){
+                walker.next = l1;
+                walker = walker.next;
+                l1 = l1.next;
+            }
+        }
+        return head.next;
+    }
+}
