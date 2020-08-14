@@ -1,0 +1,59 @@
+Reverse a singly linked list.
+
+Example:
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+
+Solution:
+
+class ListNode {
+     int val;
+     ListNode next;
+     ListNode() {}
+     ListNode(int val) { this.val = val; }
+     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+  }
+ 
+public class test {
+    public static ListNode reverseList(ListNode head) {
+    	if(head==null){
+            return null;
+        }
+        if(head.next==null){
+            return head;
+        }
+        ListNode walker = head;
+        ListNode walkerPrev = null;
+        ListNode walkerNext = walker.next;
+        while(walkerNext!=null){
+            walkerNext = walker.next;
+            walker.next=walkerPrev;
+            walkerPrev = walker;
+            walker = walkerNext;            
+        }
+        return walkerPrev;
+    }
+    
+    public static void printList(ListNode head) {
+    	ListNode walker = head;
+    	while(walker.next!=null) {
+    		System.out.println(walker.val);
+    		walker=walker.next;
+    	}
+    	System.out.println(walker.val);
+    }
+    
+    public static void main(String args[]) { 
+        ListNode head = new ListNode(85); 
+        head.next = new ListNode(15); 
+        head.next.next = new ListNode(4); 
+        head.next.next.next = new ListNode(20);   
+        System.out.println("Given Linked list"); 
+        printList(head); 
+        head = reverseList(head); 
+        System.out.println(""); 
+        System.out.println("Reversed linked list "); 
+        printList(head); 
+    }
+}
