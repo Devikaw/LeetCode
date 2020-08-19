@@ -14,6 +14,29 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 
 Solution:
 
+Using iteration (stack):
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        List<Integer> tree = new ArrayList<Integer>();
+        TreeNode node = root;
+        while(!stack.isEmpty() || node!=null){
+            if(node!=null){
+                stack.push(node);
+                node = node.left;
+            }else{
+                node = stack.pop();
+                tree.add(node.val);
+                node = node.right;
+            }
+        }
+        return tree;
+    }
+}
+
+Using recursion:
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
