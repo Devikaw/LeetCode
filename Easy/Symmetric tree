@@ -75,3 +75,84 @@ class Solution {
     }
 }
 
+Optimized:
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        return checksemmetry(root.left,root.right);
+    }
+    
+    public boolean checksemmetry(TreeNode left_node, TreeNode right_node){
+        if(left_node == null && right_node == null){
+            return true;
+        }
+        if(left_node == null || right_node == null){
+            return false;
+        }
+        return (left_node.val == right_node.val) && checksemmetry(left_node.left, right_node.right) && checksemmetry(left_node.right, right_node.left);
+    }
+}
+
+Using Iteration:
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.add(root.left);
+        stack.add(root.right);
+        while(!stack.isEmpty()){
+            TreeNode t1 = stack.pop();
+            TreeNode t2 = stack.pop();
+            if(t1==null && t2==null){
+                continue;
+            }
+            if(t1==null || t2==null){
+                return false;
+            }
+            if(t1.val!=t2.val){
+                return false;
+            }
+            stack.add(t1.left);
+            stack.add(t2.right);
+            stack.add(t1.right);
+            stack.add(t2.left);
+        }
+        return true;
+    }
+}
