@@ -1,0 +1,77 @@
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+ 
+
+But the following [1,2,2,null,3,null,3] is not:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+   
+Using recursion:
+
+Solution:
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        TreeNode right = new TreeNode();
+        right = reverse(root.right);
+        TreeNode left = root.left;
+        return checksemmetry(left,right);
+    }
+    
+    public boolean checksemmetry(TreeNode left_node, TreeNode right_node){
+        if((left_node == null && right_node != null) || (left_node != null && right_node == null)){
+            return false;
+        }
+        if(left_node == null && right_node == null){
+            return true;
+        }
+        if(left_node.val!=right_node.val){
+            return false;
+        }
+        boolean left = checksemmetry(left_node.left, right_node.left);
+        boolean right = checksemmetry(left_node.right, right_node.right);
+        return left&&right;
+    }
+    
+    public TreeNode reverse(TreeNode node){
+        if(node==null){
+            return null;
+        }
+        TreeNode temp = node.right;
+        node.right = node.left;
+        node.left = temp;
+        reverse(node.left);
+        reverse(node.right);
+        return node;
+    }
+}
+
