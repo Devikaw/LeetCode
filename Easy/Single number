@@ -1,14 +1,19 @@
-Given a linked list, determine if it has a cycle in it.
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 
-To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. If pos is -1, then there is no cycle in the linked list.
-
- 
+Follow up: Could you implement a solution with a linear runtime complexity and without using extra memory?
 
 Example 1:
 
-Input: head = [3,2,0,-4], pos = 1
-Output: true
-Explanation: There is a cycle in the linked list, where tail connects to the second node.
+Input: nums = [2,2,1]
+Output: 1
+Example 2:
+
+Input: nums = [4,1,2,1,2]
+Output: 4
+Example 3:
+
+Input: nums = [1]
+Output: 1
 
 Solution:
 
