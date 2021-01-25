@@ -1,0 +1,20 @@
+static int[] maximumBoundedArray(int n, int lBound, int uBound) {
+    	if(((uBound-lBound)*2+1)<n) {
+    		return null;
+    	}
+    	int index = (n%2==1)?n/2:n/2-1;
+    	int[] result = new int[n];
+    	result[index] = uBound;
+    	int i = index-1;
+    	int temp = uBound;
+    	while(i>=0) {
+    		result[i] = --temp;
+    		i--;
+    	}
+    	i = index+1;
+    	while(i<result.length) {
+    		result[i] = --uBound;
+    		i++;
+    	}
+    	return result;
+  }
